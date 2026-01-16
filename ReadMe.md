@@ -31,154 +31,67 @@ python -c "import pygame; print(pygame.__version__)"
 ```
 
 > On Windows, use `python`, not `python3`.
+## ⭐ Deliverable 3 — Starfield Background (Pygame)
+
+### Goal
+Add a simple **starfield background** so space doesn’t look empty.  
+Stars should **stay in the same place** every frame (not flicker).
+
+This teaches:
+- importing modules
+- lists
+- loops
+- drawing with pygame
+- why we separate *setup* from *draw*
 
 ---
 
-## How to run the project
-
-From the folder where your `main.py` is located:
-
-```bash
-python main.py
-```
+### What you are adding
+You will:
+1. Import the `random` module
+2. Create a **list of stars** (once)
+3. Draw those stars **every frame**
 
 ---
 
-## Required files to turn in (minimum)
-
-Your Git repo must include at least:
-
-```
-SpaceAdventureGame/
-  README.md
-  main.py
-```
-
-That’s the minimum for your sandbox to display and run.
-
----
-
-## Deliverables (what your sandbox MUST do)
-
-### ✅ Deliverable 1 — Window opens and stays open
-
-Your program must:
-
-* open a pygame window
-* stay open until the user clicks the **X**
-* not freeze / not instantly close
-
-**Required concepts**
-
-* `pygame.init()`
-* `pygame.display.set_mode(...)`
-* a `while running:` loop
-* event handling: `pygame.QUIT`
-* `pygame.display.flip()`
-* `clock.tick(60)`
-
----
-
-### ✅ Deliverable 2 — Background + at least 2 objects drawn
-
-You must draw:
-
-* a background (solid color is fine)
-* at least **2 circles** (ex: a star + a planet)
-
-Use:
-
-* `screen.fill((r,g,b))`
-* `pygame.draw.circle(...)`
-
----
-
-### ✅ Deliverable 3 — Movement using conditionals
-
-You must move ONE object using arrow keys:
-
-* LEFT moves it left
-* RIGHT moves it right
-
-Use:
-
-* `keys = pygame.key.get_pressed()`
-* `if keys[pygame.K_LEFT]: ...`
-* `if keys[pygame.K_RIGHT]: ...`
-
----
-
-### ✅ Deliverable 4 — HUD text on screen
-
-You must display text on screen, such as:
-
-* “Solar System Sandbox”
-* “Planet X: ___”
-* “FPS: ___”
-
-Use:
-
-* `pygame.font.SysFont(...)`
-* `font.render(...)`
-* `screen.blit(...)`
-
----
-
-## Optional upgrades (extra credit / pizzaz)
-
-Pick 1–2 if you have time:
-
-* Add 30 tiny stars (small circles)
-* Add a second planet with a different size/color
-* Add a pause key `P` to stop motion
-* Make one planet orbit a star using an `angle` variable
-* Add a “reset” key `R` to reset positions
-
----
-
-## Checklist before submitting
-
-* [ ] Window opens and stays open
-* [ ] Close button works
-* [ ] At least 2 circles drawn
-* [ ] Arrow keys move something
-* [ ] Text appears on screen
-* [ ] Code runs with `python main.py`
-* [ ] Pygame installed successfully
-
----
-
-## Common problems (quick fixes)
-
-### “Window doesn’t show” or closes instantly
-
-You are missing the `while running:` loop or `pygame.display.flip()`.
-
-### “Not responding”
-
-You are not processing events:
+### Step 1 — Import `random`
+At the top of the file with the other imports:
 
 ```python
-for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-        running = False
-```
+import random
+Step 2 — Create a stars list (SETUP, outside the game loop)
+Add this once, near the top of the file (after planets is fine):
 
-### Movement doesn’t work
+python
+Copy code
+stars = []
 
-Make sure `pygame.key.get_pressed()` is inside the loop, and you update position each frame.
+for _ in range(15):  # try 5–20 stars
+    x = random.randint(0, WIDTH)
+    y = random.randint(0, HEIGHT)
+    stars.append((x, y))
+✅ This only runs one time
+❌ Do NOT put this inside the while running: loop
 
----
+Step 3 — Draw the stars (DRAW section)
+Inside the main loop, after screen.fill(SPACE):
 
-## What this prepares you for (next)
+python
+Copy code
+for star in stars:
+    pygame.draw.circle(screen, (200, 200, 220), star, 1)
+This draws each star as a tiny dot.
 
-Once this sandbox works, you’ll be ready to build:
+Why this works
+stars is a list of positions
 
-* meteors falling (circles moving down)
-* bullets (rectangles moving up)
-* collision checks (if objects touch)
-* missions driven by a config file
+We loop over it every frame
 
-That becomes the full Space Adventure Game.
+The positions don’t change → no flickering
 
+This is how games reuse data every frame
 
+Common mistakes (watch for these!)
+❌ Creating stars inside the game loop (causes flicker)
+❌ Forgetting import random
+❌ Using random.randint() every frame
