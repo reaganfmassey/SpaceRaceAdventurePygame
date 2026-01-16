@@ -6,7 +6,7 @@ import math
 import pygame
 
 # ---------------------------
-# SETTINGS (easy knobs)
+# SETTINGS
 # ---------------------------
 WIDTH, HEIGHT = 900, 520
 FPS = 60
@@ -17,7 +17,7 @@ WHITE = (240, 240, 240)
 SUN = (255, 190, 60)
 
 # ---------------------------
-# PLANET DATA (Module 0 style: simple variables)
+# PLANET DATA (config style)
 # Each planet is a dictionary. We'll draw each one.
 # ---------------------------
 planets = [
@@ -27,7 +27,7 @@ planets = [
     {"name": "Mars",    "radius": 8,  "orbit": 165, "speed": 0.85,"color": (230, 120, 90),  "angle": 0.0},
 ]
 
-# TODO 1 (Student): Add one more planet:
+# TODO 1 (DELIVERABLE A!!) : Add one more planet:
 # Example:
 # {"name": "Jupiter", "radius": 16, "orbit": 220, "speed": 0.55, "color": (210, 170, 120), "angle": 0.0}
 
@@ -91,23 +91,23 @@ def main():
             pygame.draw.circle(screen, p["color"], (x, y), p["radius"])
             pygame.draw.circle(screen, WHITE, (x, y), p["radius"], width=1)
 
-            # Optional label (comment out if too busy)
+            # label
             label = small.render(p["name"], True, (180, 190, 220))
             screen.blit(label, (x + p["radius"] + 6, y - 8))
 
-        # HUD text
+ 
         title = font.render("Solar Sandbox", True, (230, 230, 240))
         screen.blit(title, (16, 14))
 
         instr = small.render("ESC quit | SPACE pause/unpause | TODO: add a planet", True, (170, 180, 200))
         screen.blit(instr, (16, 40))
 
-        # TODO 2 (Student): Print the number of planets on screen:
+        # TODO 2 (Deliverable 2!!): Print the number of planets on screen:
         # Example: "Planets: 4"
         count_text = small.render(f"Planets: {len(planets)}", True, (170, 180, 200))
         screen.blit(count_text, (16, 60))
 
-        # TODO 3 (Student): Add a starfield background (5-20 dots)
+        # TODO 3 (Deliverable 3!!): Add a starfield background (5-20 dots)
         # Hint: use pygame.draw.circle inside a loop with random positions.
         # Keep it simple: draw the SAME stars every frame by pre-making a stars list.
 
@@ -117,3 +117,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
