@@ -27,7 +27,7 @@ planets = [
     {"name": "Mars",    "radius": 8,  "orbit": 165, "speed": 0.85,"color": (230, 120, 90),  "angle": 0.0},
 ]
 
-# TODO 1 (DELIVERABLE A!!) : Add one more planet:
+# TODO 1 (DELIVERABLE A!!) : Add three more planets
 # Example:
 # {"name": "Jupiter", "radius": 16, "orbit": 220, "speed": 0.55, "color": (210, 170, 120), "angle": 0.0}
 
@@ -117,4 +117,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
